@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Time Character Counter</title>
+    <style>
+        body {
+            background-image: url(./image/bg.jpg);
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            display: flex;
+            justify-content: center;
+            margin-top: 10%;
+        }
+        .container{
+            background-color:rgb(255, 245, 245);
+            padding: 20px;
+            width: 500px;
+            border-radius: 10px;
+            box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+        }
+        #warning {
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+<h2>Message Box</h2>
+<textarea id="message" rows="5" cols="50" maxlength="200" placeholder="Type your message here..."></textarea>
+<p id="counter">0/200 characters</p>
+<p id="warning">You have the maximum character limit  !!</p>
+</div>
+
+<script>
+    var messageInput = document.getElementById('message');
+    var counterDisplay = document.getElementById('counter');
+    var warningMessage = document.getElementById('warning');
+    var maxChars = 200;
+
+    messageInput.addEventListener('input', () => {
+        var currentLength = messageInput.value.length;
+        counterDisplay.textContent = `${currentLength}/${maxChars} characters`;
+
+        if (currentLength >=maxChars) {
+            warningMessage.style.display = 'block';
+            messageInput.value = messageInput.value.slice(0, maxChars); // Prevent further typing
+            counterDisplay.textContent = `${maxChars}/${maxChars} characters`; // Update counter display
+        } else {
+            warningMessage.style.display = 'none';
+        }
+    });
+</script>
+
+</body>
+</html>
